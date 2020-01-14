@@ -10,11 +10,11 @@ import {
     Int
 } from 'type-graphql'
 import { hash, compare } from 'bcryptjs'
-import { User } from './entity/User'
-import { MyContext } from './MyContext'
-import { createRefreshToken, createAccessToken } from './auth'
-import { isAuth } from './isAuth'
-import { sendRefreshToken } from './sendRefreshToken'
+import { User } from '../entity/User'
+import { MyContext } from '../MyContext'
+import { createRefreshToken, createAccessToken } from '../auth'
+import { isAuth } from '../isAuth'
+import { sendRefreshToken } from '../sendRefreshToken'
 import { getConnection } from 'typeorm'
 import { verify } from 'jsonwebtoken'
 
@@ -120,9 +120,7 @@ export class UserResolver {
         if (!valid) {
             throw new Error('bad password')
         }
-
         sendRefreshToken(res, createRefreshToken(user))
-
         return {
             accessToken: createAccessToken(user),
             user
